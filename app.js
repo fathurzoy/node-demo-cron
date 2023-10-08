@@ -41,6 +41,9 @@ const fetchDataFromLocalAPI = async () => {
     //     console.log('Current time is not within the specified range.');
     // }
 
+    console.log(currentDateTime.getHours() >= 22)
+    console.log(currentDateTime.getHours() < 2)
+    console.log(currentDateTime.getHours())
     console.log('qwe')
 };
 
