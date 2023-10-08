@@ -13,6 +13,21 @@ const fetchDataFromLocalAPI = async () => {
         // You can process the response data here as needed
     } catch (error) {
         console.error('Error:', error);
+    } finally {
+        const jakartaTimezone = 'Asia/Jakarta';
+        const options = {
+            timeZone: jakartaTimezone,
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: false, // Use 24-hour format
+        };
+
+        const jakartaDateTime = new Date().toLocaleString('en-US', options);
+        console.log('Current Date and Time in Jakarta:', jakartaDateTime);
     }
 };
 
@@ -27,7 +42,7 @@ app.use(express.json());
 app.use('/abc', movies);
 
 
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.send('Welcome to Daily Code Buffer in Heroku Auto Deployment!!');
 })
 
