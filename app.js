@@ -44,6 +44,7 @@ const fetchDataFromLocalAPI = async () => {
     console.log(currentDateTime.getHours() >= 22)
     console.log(currentDateTime.getHours() < 2)
     console.log(currentDateTime.getHours())
+    console.log(currentDateTime)
     console.log('qwe')
 };
 
