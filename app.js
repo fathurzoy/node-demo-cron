@@ -36,7 +36,7 @@ const fetchDataFromLocalAPI = async () => {
 //     fetchDataFromLocalAPI();
 // });
 
-const cronExpression = '0 22-2 * * *'; // Run between 11 PM and 2 AM
+const cronExpression = '0 22-2 * * *'; // Run between 10 PM and 2 AM
 cron.schedule(cronExpression, () => {
   fetchDataFromLocalAPI();
 });
