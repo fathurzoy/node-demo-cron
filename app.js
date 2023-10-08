@@ -41,10 +41,12 @@ const fetchDataFromLocalAPI = async () => {
     //     console.log('Current time is not within the specified range.');
     // }
 
+    console.log('qwe')
 };
 
 // Schedule the cron job to run every minute (adjust the schedule as needed)
 cron.schedule('* * * * *', () => {
+    console.log('qwex')
     fetchDataFromLocalAPI();
 });
 
