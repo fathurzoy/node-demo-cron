@@ -32,8 +32,13 @@ const fetchDataFromLocalAPI = async () => {
 };
 
 // Schedule the cron job to run every minute (adjust the schedule as needed)
-cron.schedule('* * * * *', () => {
-    fetchDataFromLocalAPI();
+// cron.schedule('* * * * *', () => {
+//     fetchDataFromLocalAPI();
+// });
+
+const cronExpression = '0 22-2 * * *'; // Run between 11 PM and 2 AM
+cron.schedule(cronExpression, () => {
+  fetchDataFromLocalAPI();
 });
 
 
