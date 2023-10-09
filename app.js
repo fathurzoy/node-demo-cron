@@ -2,17 +2,25 @@ const express = require('express');
 const app = express();
 const axios = require('axios'); // for making HTTP requests
 const cron = require('node-cron');
+const moment = require('moment-timezone');
 const Joi = require('@hapi/joi');
 const movies = require('./movies');
 
+const getCurrentDateTimeInJakartaTimezone = () => {
+    const jakartaTimezone = 'Asia/Jakarta';
+    const nowInJakarta = moment().tz(jakartaTimezone);
+    return nowInJakarta.format('YYYY-MM-DD HH:mm:ss');
+};
+
 // Define a function to make the API request
 const fetchDataFromLocalAPI = async () => {
-    const jakartaTimezone = 'Asia/Jakarta';
-    const currentDateTime = new Date();
-    currentDateTime.toLocaleString('en-US', { timeZone: jakartaTimezone });
+    const currentDateTimeInJakarta = getCurrentDateTimeInJakartaTimezone();
 
     // Check if the current hour is between 22 (10 PM) and 2 (2 AM)
-    if (currentDateTime.getHours() >= 22 || currentDateTime.getHours() < 2) {
+    const currentHourInJakarta = moment().tz('Asia/Jakarta').hour();
+
+    // Check if the current hour is between 22 (10 PM) and 2 (2 AM)
+    if (currentHourInJakarta >= 22 || currentHourInJakarta < 2) {
         try {
             // Make a GET request to your local API endpoint
             const response = await axios.get('https://cron-kcic-ebc9cb106945.herokuapp.com/abc/api/cron');
@@ -21,20 +29,7 @@ const fetchDataFromLocalAPI = async () => {
         } catch (error) {
             console.error('Error:', error);
         } finally {
-            const jakartaTimezone = 'Asia/Jakarta';
-            const options = {
-                timeZone: jakartaTimezone,
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
-                hour12: false, // Use 24-hour format
-            };
-
-            const jakartaDateTime = new Date().toLocaleString('en-US', options);
-            console.log('Current Date and Time in Jakarta:', jakartaDateTime);
+            console.log('Current Date and Time in Jakarta:', currentDateTimeInJakarta);
         }
     }
     // else {
