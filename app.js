@@ -12,7 +12,7 @@ const fetchDataFromLocalAPI = async () => {
     currentDateTime.toLocaleString('en-US', { timeZone: jakartaTimezone });
 
     // Check if the current hour is between 22 (10 PM) and 2 (2 AM)
-    if (currentDateTime.getHours() >= 22 || currentDateTime.getHours() <= 2) {
+    if (currentDateTime.getHours() >= 22 || currentDateTime.getHours() < 2) {
         try {
             // Make a GET request to your local API endpoint
             const response = await axios.get('https://cron-kcic-ebc9cb106945.herokuapp.com/abc/api/cron');
